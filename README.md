@@ -28,14 +28,16 @@ flowchart LR
     
     WSP -->|"Read/Write"| WSP_REDIS
     WSP_REDIS -->|"Replicate"| REPLICA
-    EXCHANGE -->|"Write to Streams Only\nvia Special ACL"| REPLICA
+    EXCHANGE -->|"Write to Streams\nRead CI Values"| REPLICA
     WSP -->|"Subscribe"| REPLICA
 ```
 
 The Redis Mirror Community Edition uses a specific Redis architecture:
 
 1. A main Redis instance at the WSP
-2. A replica Redis instance with a special ACL configuration that allows the Exchange to write specifically to stream keys
+2. A replica Redis instance with a special ACL configuration that allows the Exchange to:
+   - Write specifically to stream keys
+   - Read Credit Inventory (CI) values
 
 This architecture ensures data integrity while enabling real-time communication between parties.
 
@@ -159,6 +161,10 @@ def handle_credit_request(request):
 
 # Start processing credit requests
 exchange_client.start_credit_request_processor(callback=handle_credit_request)
+
+# Read Credit Inventory values
+ci_value = exchange_client.get_credit_inventory("user123", "BTC")
+print(f"Credit Inventory for user123 BTC: {ci_value}")
 
 # Generate settlement reports
 settlement_reports = exchange_client.generate_settlement_reports()
@@ -374,6 +380,9 @@ credit_manager = CreditManager(connection_manager, config)
 
 # Process credit requests
 credit_manager.start_processor(callback=lambda request: print(f"Processing request: {request}"))
+
+# Read Credit Inventory
+ci_value = credit_manager.get_credit_inventory("user123", "BTC")
 ```
 
 ### Settlement Manager
@@ -398,6 +407,9 @@ inventory_processor = CreditInventoryProcessor(connection_manager, config)
 
 # Update credit inventory
 inventory_processor.update_inventory("user123", "BTC", 10.0)
+
+# Read credit inventory
+ci_value = inventory_processor.get_inventory("user123", "BTC")
 ```
 
 ### Account Integration
@@ -481,7 +493,8 @@ Redis Streams are used for event-driven communication between WSPs and Exchanges
 
 Access Control Lists (ACLs) in Redis 6.0+ provide fine-grained security controls:
 
-- Restricted write access for Exchanges
+- Restricted write access for Exchanges (limited to stream keys)
+- Restricted read access for Exchanges (limited to CI keys)
 - Pattern-based key restrictions
 - Command-level permissions
 - User-based authentication
@@ -492,7 +505,7 @@ The Redis Mirror architecture uses Redis replication with a special configuratio
 
 - WSP Redis instance as the master
 - Stream-Writeable Replica at the Exchange
-- Special ACL configuration to allow limited writes to the replica
+- Special ACL configuration to allow limited writes to the replica and reading of CI values
 
 This unique configuration enables secure, real-time communication while maintaining data integrity.
 
