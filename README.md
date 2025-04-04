@@ -1,6 +1,6 @@
 # Redis Mirror Community Edition SDK
 
-<img src="assets/redis_mirror_logo.jpeg" alt="Redis Mirror Logo" width="300"/>
+<img src="assets/redis_mirror_logo.jpeg" alt="Redis Mirror Logo" width="1000"/>
 
 A comprehensive Python SDK for integrating with the Redis Mirror Community Edition system, providing tools for both Wallet Service Providers (WSPs) and Exchanges. Created by [FXCH Ltd.](https://fxclr.com)
 
