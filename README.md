@@ -1,12 +1,12 @@
-# Redis Mirror Community Edition SDK
+# REDIS Mirror SDK
 
 <img src="assets/redis_mirror_logo.jpeg" alt="Redis Mirror Logo" width="1000"/>
 
-A comprehensive Python SDK for integrating with the Redis Mirror Community Edition system, providing tools for both Wallet Service Providers (WSPs) and Exchanges. Created by [FXCH Ltd.](https://fxclr.com)
+A comprehensive Python SDK for integrating with the REDIS Mirror system, providing tools for both Wallet Service Providers (WSPs) and Exchanges. Created by [FXCH Ltd.](https://fxclr.com)
 
 ## Overview
 
-The Redis Mirror Community Edition SDK simplifies integration with the Redis Mirror system by providing a standardized approach for "off-Exchange" integration between cryptocurrency exchanges and custodians. It leverages Redis distributed cache technology to allow exchanges to "mirror" user asset balances held at Wallet Service Providers (WSPs) and custodians without requiring direct asset transfers.
+The REDIS Mirror SDK simplifies integration with the Redis Mirror system by providing a standardized approach for "off-Exchange" integration between cryptocurrency exchanges and custodians. It leverages Redis distributed cache technology to allow exchanges to "mirror" user asset balances held at Wallet Service Providers (WSPs) and custodians without requiring direct asset transfers.
 
 This standard enables users to trade on exchanges using assets that remain securely held at their custodian of choice, addressing key challenges in the cryptocurrency trading ecosystem.
 
@@ -32,7 +32,7 @@ flowchart LR
     WSP -->|"Subscribe"| REPLICA
 ```
 
-The Redis Mirror Community Edition uses a specific Redis architecture:
+The REDIS Mirror uses a specific Redis architecture:
 
 1. A main Redis instance at the WSP
 2. A replica Redis instance with a special ACL configuration that allows the Exchange to:
@@ -74,7 +74,7 @@ pip install -e .
 
 ### WSP Integration
 
-The SDK provides a complete toolkit for WSP integration with the Redis Mirror system:
+The SDK provides a complete toolkit for WSP integration with the REDIS Mirror system:
 
 ```python
 from sdk_ce.redis_mirror_core import Configuration, RedisConnectionManager
@@ -178,7 +178,7 @@ connection_manager.close()
 
 ### Event-Driven Architecture
 
-Redis Mirror uses Redis Streams for event-driven communication:
+REDIS Mirror uses Redis Streams for event-driven communication:
 
 ```python
 from sdk_ce.redis_mirror_core import StreamProcessor, KeyManager
@@ -476,9 +476,9 @@ assert ResponseValidators.validate_credit_response(credit_response)
 
 ## Redis as the Backbone
 
-<img src="assets/redis_mirror_logo.jpeg" alt="Redis Mirror Architecture" width="300" align="right"/>
+<img src="assets/redis_mirror_logo.jpeg" alt="REDIS Mirror Architecture" width="300" align="right"/>
 
-Redis is the backbone of the Redis Mirror solution, providing the critical infrastructure for real-time communication between WSPs and Exchanges. The Redis Mirror Community Edition leverages several key Redis features:
+Redis is the backbone of the REDIS Mirror solution, providing the critical infrastructure for real-time communication between WSPs and Exchanges. The REDIS Mirror leverages several key Redis features:
 
 ### Redis Streams
 
@@ -501,7 +501,7 @@ Access Control Lists (ACLs) in Redis 6.0+ provide fine-grained security controls
 
 ### Redis Replication
 
-The Redis Mirror architecture uses Redis replication with a special configuration:
+The REDIS Mirror architecture uses Redis replication with a special configuration:
 
 - WSP Redis instance as the master
 - Stream-Writeable Replica at the Exchange
@@ -517,7 +517,7 @@ This project is licensed under the GNU Affero General Public License v3.0 (AGPL-
 
 ### Contribution
 
-Contributions to the Redis Mirror Community Edition SDK are welcome. Please follow these steps to contribute:
+Contributions to the REDIS Mirror SDK are welcome. Please follow these steps to contribute:
 
 1. Fork the repository
 2. Create a feature branch
@@ -527,10 +527,10 @@ Contributions to the Redis Mirror Community Edition SDK are welcome. Please foll
 
 ### Acknowledgments
 
-Redis Mirror Community Edition is built on Redis, an open-source, in-memory data structure store used as a database, cache, and message broker. We extend our gratitude to the Redis community for creating and maintaining this powerful tool that serves as the backbone of our solution.
+REDIS Mirror is built on Redis, an open-source, in-memory data structure store used as a database, cache, and message broker. We extend our gratitude to the Redis community for creating and maintaining this powerful tool that serves as the backbone of our solution.
 
 ---
 
 <img src="assets/fxch_logo.png" alt="FXCH Logo" width="150"/>
 
-*Redis Mirror Community Edition SDK is created and maintained by [FXCH Ltd.](https://fxclr.com)*
+*REDIS Mirror SDK is created and maintained by [FXCH Ltd.](https://fxclr.com)*
